@@ -38,15 +38,7 @@ Thank you for your inquiry about the status of your project.
 I am happy to confirm that the translation and localization work for your project is on track and progressing according to the schedule. We will reach out for further updates soon! Please, rest assured! :)
 """
     },
-    "vendor_application": {
-        "body": """
-Dear {name},
 
-Thank you for your interest in joining our team of translators and linguists. We appreciate you taking the time to submit your application.
-
-We receive a high volume of applications, and our team is currently reviewing all submissions. We will contact you if your skills and experience match our current needs.
-"""
-    },
     "detailed_negotiation": {
         "body": """
 Dear {name},
@@ -62,7 +54,7 @@ Thank you for your prompt response and for your interest in a partnership. We've
 
 We hope these rates are acceptable for this initial period. Please share with us your language certificates, all information will be kept strictly confidential. Once you confirm the rates, I'll create a profile for you on LSP.expert (our platform). You may also receive a short, unpaid test in the coming weeks or before working on any actual projects.
 
-Please also sign this NDA to proceed: {nda_link}!
+Please DOWNLOAD and sign this NDA and share the signed on as an attachment: {nda_link}!
 """
     },
     "Vendor_Negotiation_completion": {
@@ -89,20 +81,33 @@ Thank you for your interest in a partnership, I am impressed by your profile. In
 
 We hope these rates are acceptable for this initial period. Please share with us your language certificates, all information will be kept strictly confidential. Once you confirm the rates, I'll create a profile for you on LSP.expert (our platform). You may also receive a short, unpaid test in the coming weeks or before working on any actual projects.
 
-Please also sign this NDA to proceed: {nda_link}!
+Please DOWNLOAD and sign this NDA and share the signed on as an attachment: {nda_link}!
 """
+    }, 
+
+    "Vendor_Collaboration_Rejection": {
+        "body": """
+        Hi (again) {name}, 
+
+        No problem, dear. That's completely understandable. I hope we can find an opportunity to collaborate in the future.
+
+        Have a great day! 
+        """ 
     }
 }
 
 KEYWORDS_TO_TRIGGER = {
+    
     "price_request": ["quote", "cost", "price", "how much", "estimate"],
+    
     "project_update": ["status update", "project status", "progress", "deadline"],
-    "vendor_application": ["vendor application", "join team", "freelance linguist", "translator application"],
-    "detailed_negotiation": ["persian", "farsi", "fr ca", "fr fr", "french", "es latam", "es mx", "es mexico", "es spain", "es ar", "argentina", "spanish",
-                             "pt pt", "pt br", "portuguese", "portuguese brazil",
-                             "rates", "pricing", "rate proposal", "rate sheet", "price list", "my rates are", "our updated cv", "cv", "resume"],
+    
+     "Vendor_Collaboration_Rejection": ["sorry", "low", "low rates"],
+
+    "detailed_negotiation": ["persian", "farsi", "fr ca", "fr fr", "french", "es latam", "es mx", "es mexico", "es spain", "es ar", "argentina", "spanish","pt pt", "pt br", "portuguese", "portuguese brazil","rate card", "pricing", "rate proposal", "rate sheet", "price list", "my rates are", "our updated cv", "cv", "resume"],
+    
     "Vendor_Negotiation_completion": ["very pleased", "agreeing to my proposed translation rate", "agreeing to my rate"],
-    "Translators offering Services": ["translator", "i would like to work with you", "you can count on my availability"]
+    "Translators offering Services": ["i would like to work with you", "you can count on my availability"]
 }
 
 KEYWORDS_TO_EXCLUDE = [
@@ -252,10 +257,10 @@ def reply_to_email(original_message, template, recipient_name):
         reply = original_message.Reply()
         reply.Subject = original_message.Subject or ""
 
-        # ✅ Convert NDA link to HTML hyperlink
+        # ✅ Make NDA clickable
         clickable_nda = f'<a href="{NDA_LINK}" target="_blank">NDA</a>'
 
-        # Prepare body text with hyperlink
+        # ✅ Format your message content
         new_body_text = template["body"].format(
             name=recipient_name,
             trans_rate=RATES["TRA"],
@@ -264,24 +269,13 @@ def reply_to_email(original_message, template, recipient_name):
             rev_rate=RATES["REV"],
             qa_rate=RATES["QA"],
             transcription_rate=RATES["TRANSCRIPTION"],
-            nda_link=clickable_nda  # ✅ replaces plain text with clickable link
-        )
+            nda_link=clickable_nda
+        ).strip()
 
-        new_body_text = new_body_text.strip()
-        signature_html = reply.HTMLBody.strip() if reply.HTMLBody else ""
+        # ✅ Safely prepend your text to Outlook's default reply body
+        reply.HTMLBody = f"<p>{new_body_text.replace(chr(10), '<br>')}</p><br>" + reply.HTMLBody
 
-        final_html = f"""
-<html>
-  <body style="font-family:Calibri, sans-serif; font-size:11pt;">
-    <p>{new_body_text.replace(chr(10), "<br>")}</p>
-    {signature_html}
-    <br>
-    {original_message.HTMLBody or ""}
-  </body>
-</html>
-"""
-        reply.HTMLBody = final_html
-        reply.Save()
+        reply.Save()  # ✅ Creates a valid draft you can send manually
     except Exception as e:
         print(f"Error creating draft reply: {e}")
 

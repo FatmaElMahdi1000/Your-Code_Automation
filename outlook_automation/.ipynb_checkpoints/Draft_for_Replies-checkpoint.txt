@@ -1,0 +1,35 @@
+Possible replies to vendors: 
+-1- Thanks [Vendor,Name]. Your profile has been registered on our portal, as soon as I’ve a project for you, You’ll receive either an automated notification or an email from me.
+-2 - No problem, Dear, Could you please share your CV with me for any future opportunities ?  Also, Could you please share below?  
+
+1.	Degree certificate(s) in a language/translation-related field.
+2.	Language proficiency certifications for English-Arabic (e.g., test certificates, accredited credentials).
+Please rest assured that all provided information will be used solely for internal review and kept strictly confidential.  
+
+-3- Dear {},
+
+Thank you for your response and for your interest in a partnership.
+
+We've reviewed the rates you shared and, in the interest of establishing a long-term collaboration, we'd like to propose the following rates for your consideration, instead:
+
+* Translation (TRA): {trans_rate}
+* Machine Translation Post-Editing (MTPE): {mtpe_rate}
+* Proofreading (PRF): {proof_rate}
+* Revision (REV): {rev_rate}
+* Quality Assurance (QA): {qa_rate}
+* Transcription: {transcription_rate}
+
+I hope these rates are acceptable at least for this period, I’ll bear in mind to update them for you in the future! 
+I look forward to a mutually beneficial partnership. Additionally, for our internal records, could you please attach your language certificates? Rest assured that all provided information will be used solely for internal review and kept strictly confidential.
+
+Please also sign this NDA: LINK {}
+We look forward to hearing from you.
+
+-4- Hi {Name},  You’re always welcome dear! Please just fill in this NDA and share it signed as soon as you can, I've created a profile for you on LSP.expert(our platform). You may also receive a short, unpaid test in the coming weeks before working on actual projects.
+
+Looking forward to moving forward with our collaboration soon! 
+
+**********************************
+GET REPLIES FOR THIS
+-5-Thank you for contacting me. 
+Sorry, where exactly did you come across my professional profile?
