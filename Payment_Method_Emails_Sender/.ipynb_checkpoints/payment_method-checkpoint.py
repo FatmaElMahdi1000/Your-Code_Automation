@@ -60,6 +60,9 @@ Just a heads-up: To ensure we can process your payment, you'll need a Payoneer a
 Do you have a Payoneer account already? If so, could you please send us the email you used for it? If not, please create an account and then send us the email once you're done.
 
 Thanks for your cooperation!
+
+Best,
+Your Code Team
 """
 
 subject = None
@@ -69,11 +72,6 @@ with open(file, 'r', encoding='utf-8') as txt:
 for address in Emails_list:
     Email_object = Email(address, subject, body)
     print(Email_object.sendingEmail())
-
-
-
-
-
 
 
 
